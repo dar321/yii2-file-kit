@@ -236,7 +236,8 @@ class Storage extends Component
         } else {
             $this->dirindex = $this->getFilesystem()->read($normalizedPath);
             if ($this->maxDirFiles !== -1) {
-                $filesCount = count($this->getFilesystem()->listContents($this->dirindex));
+				$curpath = $path . DIRECTORY_SEPARATOR . $this->dirindex;
+                $filesCount = count($this->getFilesystem()->listContents($curpath));
                 if ($filesCount > $this->maxDirFiles) {
                     $this->dirindex++;
                     $this->getFilesystem()->put($normalizedPath, (string)$this->dirindex);
